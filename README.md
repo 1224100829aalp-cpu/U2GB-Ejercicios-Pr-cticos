@@ -476,4 +476,216 @@ public class Principal {
     }
 }
 ```
+## Actividad 03: Representación y Evaluación de Polinomios con Listas Enlazadas
+### Nodo
+```javascript
+package Actividad3;
+
+/**
+ *
+ * @author angellunaperez
+ * Esta clase representa un término del
+ * polinomio (un nodo en la lista)
+ */
+
+public class Nodo {
+    public double coeficiente;
+    public int exponente;
+    public Nodo siguiente;
+
+    /**
+     * Constructor para crear un nuevo termino.
+     *  El coeficiente numerico del término
+     * El exponente entero del término
+     */
+    public Nodo(double coeficiente, int exponente) {
+        this.coeficiente = coeficiente;
+        this.exponente = exponente;
+        this.siguiente = null;
+    }
+}
+```
+### PolinomioLista
+```javascript
+package Actividad3;
+
+/**
+ *
+ * @author angellunaperez
+ * En esta clase se Representa el polinomio
+ * completo mediante una lista
+ * enlazada simple.
+*/
+
+public class PolinomioLista {
+    private Nodo cabeza;
+
+    public PolinomioLista() {
+        this.cabeza = null;
+    }
+
+    //  Tarea 2: Representación con lista enlazada (Inserción al final) 
+    /**
+     * Agrega un nuevo término al final de la lista.
+   */
+    public void agregarTermino(double coeficiente, int exponente) {
+        if (coeficiente == 0) return; // No agregar términos con coeficiente cero
+
+        Nodo nuevoNodo = new Nodo(coeficiente, exponente);
+
+        if (this.cabeza == null) {
+            this.cabeza = nuevoNodo;
+            return;
+        }
+
+        Nodo actual = this.cabeza;
+        while (actual.siguiente != null) {
+            actual = actual.siguiente;
+        }
+        actual.siguiente = nuevoNodo;
+    }
+
+    // --- Tarea 3: Evaluación del polinomio ---
+    /**
+     * Calcula el valor del polinomio P(x) para un valor de x dado.
+     * * P(x) = Sumatoria de (coeficiente * x^exponente) para todos los términos.
+     * @param x El punto en el que se evalúa el polinomio.
+     * @return El valor total del polinomio en ese punto.
+     */
+    public double evaluar(double x) {
+        double resultado = 0.0;
+        Nodo actual = this.cabeza;
+
+        while (actual != null) {
+            // Cálculo: coeficiente * x^exponente
+            double valorTermino = actual.coeficiente * Math.pow(x, actual.exponente);
+            resultado += valorTermino;
+            
+            actual = actual.siguiente;
+        }
+        return resultado;
+    }
+
+    // --- Utilidad: Mostrar el polinomio de forma legible ---
+    public String toString() {
+        if (this.cabeza == null) {
+            return "P(x) = 0";
+        }
+        
+        StringBuilder sb = new StringBuilder("P(x) = ");
+        Nodo actual = this.cabeza;
+        while (actual != null) {
+            // Formateo simple para la salida
+            if (actual != this.cabeza && actual.coeficiente > 0) {
+                sb.append(" + ");
+            } else if (actual.coeficiente < 0) {
+                 sb.append(" - ");
+            }
+
+            // Manejar valor absoluto del coeficiente para no duplicar el signo
+            double absCoeff = Math.abs(actual.coeficiente);
+            
+            if (actual.exponente == 0) {
+                sb.append(absCoeff);
+            } else if (actual.exponente == 1) {
+                sb.append(absCoeff).append("x");
+            } else {
+                sb.append(absCoeff).append("x^").append(actual.exponente);
+            }
+
+            actual = actual.siguiente;
+        }
+        return sb.toString();
+    }
+
+}
+```
+### Principal 
+```javascript
+package Actividad3;
+import java.util.Scanner;
+
+/**
+ *
+ * @author angellunaperez
+ * 
+ * Clase principal para la entrada
+ * de datos y presentación de 
+ * resultados.
+ * 
+ */
+
+
+public class Principal {
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        PolinomioLista polinomio = new PolinomioLista();
+
+        // --- Tarea 1: Entrada del polinomio ---
+        System.out.println("REPRESENTACIÓN Y EVALUACIÓN DE POLINOMIOS CON LISTAS ENLAZADAS");
+        System.out.println("------------------------------------------------------------------");
+        System.out.println("Ingrese los términos del polinomio en pares (coeficiente exponente).");
+        System.out.println("Para terminar, ingrese '0 0' o una entrada vacía.");
+
+        while (true) {
+            System.out.print("Término (ej. 3 4 para 3x^4): ");
+            String linea = scanner.nextLine().trim();
+
+            if (linea.isEmpty() || linea.equals("0 0")) {
+                break;
+            }
+
+            try {
+                // Dividir la línea en coeficiente y exponente
+                String[] partes = linea.split("\\s+"); 
+                if (partes.length < 2) {
+                    System.out.println("⚠️ Formato incorrecto. Intente de nuevo (ej. 5 2).");
+                    continue;
+                }
+                
+                double coef = Double.parseDouble(partes[0]);
+                int exp = Integer.parseInt(partes[1]);
+                
+                // Tarea 2: Agregar a la lista
+                polinomio.agregarTermino(coef, exp);
+                
+            } catch (NumberFormatException e) {
+                System.out.println("⚠️ Error: Asegúrese de que el coeficiente sea un número y el exponente un entero.");
+            }
+        }
+        
+        System.out.println("\n------------------------------------------------------------------");
+        System.out.println("Polinomio ingresado y representado:");
+        System.out.println(polinomio.toString());
+        System.out.println("------------------------------------------------------------------");
+
+
+        // --- Tarea 3: Evaluación y Tabla de Valores ---
+        System.out.println("\n📊 TABLA DE EVALUACIÓN P(x) de x = 0.0 hasta x = 5.0 (incremento 0.5)");
+        System.out.printf("%-10s | %s%n", "x", "P(x)");
+        System.out.println("-----------|-----------");
+
+        final double VALOR_INICIO = 0.0;
+        final double VALOR_FIN = 5.0;
+        final double INCREMENTO = 0.5;
+
+        for (double x = VALOR_INICIO; x <= VALOR_FIN; x += INCREMENTO) {
+            // Asegurar que 5.0 se incluya a pesar de posibles errores de punto flotante
+            if (x > VALOR_FIN) x = VALOR_FIN; 
+            
+            double resultado = polinomio.evaluar(x);
+            
+            // Usar formato para asegurar dos decimales para x, y dos decimales para P(x)
+            System.out.printf("%-10.1f | %-10.2f%n", x, resultado);
+
+            // Detener el bucle después de evaluar 5.0
+            if (x >= VALOR_FIN) break; 
+        }
+
+        scanner.close();
+    }
+}
+```
+
 
