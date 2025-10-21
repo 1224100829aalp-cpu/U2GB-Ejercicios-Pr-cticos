@@ -872,6 +872,203 @@ public class Principal {
 }
 
 ```
+## Actividad 05: Lista Doblemente Enlazada de Caracteres
+### NodoDoble
+```javascript
+package Actividad5;
 
+/**
+ *
+ * @author angellunaperez/**
+ * Esta clase a difernecia de los otros nodos 
+ * representa un nodo en
+ * la lista doblemente enlazada.
+ */
+
+public class NodoDoble {
+    public char caracter;
+    public NodoDoble anterior; // Puntero al predecesor
+    public NodoDoble siguiente; // Puntero al sucesor
+
+    public NodoDoble(char caracter) {
+        this.caracter = caracter;
+        this.anterior = null;
+        this.siguiente = null;
+    }
+}
+```
+### ListaDobleCaracteres
+```javascript
+package Actividad5;
+
+/**
+ *
+ * @author angellunaperez
+ * Esta clase imlementa las operaciones sobre 
+ * la lista doblemente enlazada de caracteres.
+ */
+public class ListaDobleCaracteres {
+    private NodoDoble cabeza;
+    private NodoDoble cola; // Mantener la cola facilita la inserción al final
+
+    public ListaDobleCaracteres() {
+        this.cabeza = null;
+        this.cola = null;
+    }
+
+    // --- Tarea 2: Construcción de lista doblemente enlazada (Insertar al fial) --
+    /**
+     * Inserta un nuevo nodo al final de la lista.
+     */
+    public void insertarAlFinal(char caracter) {
+        NodoDoble nuevoNodo = new NodoDoble(caracter);
+
+        if (this.cabeza == null) {
+            // Caso 1: Lista vacía.
+            this.cabeza = nuevoNodo;
+            this.cola = nuevoNodo;
+        } else {
+            // Caso 2: Insertar al final.
+            nuevoNodo.anterior = this.cola; // El nuevo nodo apunta hacia atras a la cola actual
+            this.cola.siguiente = nuevoNodo; // La cola actual apunta hacia adelante al nuevo nodo
+            this.cola = nuevoNodo; // El nuevo nodo es la nueva cola
+        }
+    }
+
+    // --- Tarea 3: Ordenamiento alfabético (Implementación: Ordenación por Inserción) ---
+    /**
+     * Ordena la lista alfabeticamente reorganizando los nodos.
+     * Utiliza un algoritmo de Ordenacion por Insercion adaptado a la lista doble.
+     */
+    public void ordenarLista() {
+        if (cabeza == null || cabeza.siguiente == null) {
+            return; // Lista vacía o con un solo elemento, ya está ordenada.
+        }
+
+        // El nodo 'ordenado' mantiene el primer elemento de la sublista ya ordenada.
+        NodoDoble ordenado = cabeza;
+        // El nodo 'actual' es el primer elemento de la sublista desordenada.
+        NodoDoble actual = cabeza.siguiente;
+
+        // Desconectar la sublista ordenada del resto para empezar el proceso
+        ordenado.siguiente = null; 
+        
+        while (actual != null) {
+            NodoDoble siguienteDesordenado = actual.siguiente; // Guardar el siguiente para no perder el enlace
+            
+            // Caso 1: El nodo actual va antes de la cabeza de la lista ordenada
+            if (actual.caracter < cabeza.caracter) {
+                // Mover el nodo 'actual' al inicio de la lista
+                actual.siguiente = cabeza;
+                cabeza.anterior = actual;
+                actual.anterior = null;
+                cabeza = actual; // 'actual' es la nueva cabeza
+            } 
+            // Caso 2: Buscar la posición correcta dentro de la lista ordenada
+            else {
+                NodoDoble temp = cabeza;
+                while (temp.siguiente != null && actual.caracter > temp.siguiente.caracter) {
+                    temp = temp.siguiente;
+                }
+                
+                // Insertar 'actual' después de 'temp'
+                actual.siguiente = temp.siguiente;
+                
+                if (temp.siguiente != null) {
+                    // El nodo que antes seguía a 'temp' ahora apunta hacia atrás a 'actual'
+                    temp.siguiente.anterior = actual; 
+                }
+                
+                actual.anterior = temp;
+                temp.siguiente = actual;
+
+                // Actualizar la cola si insertamos al final
+                if (actual.siguiente == null) {
+                    cola = actual;
+                }
+            }
+            
+            actual = siguienteDesordenado; // Pasar al siguiente nodo desordenado
+        }
+    }
+
+
+    // -- Tarea 4: Mostrar lista ordeada ---
+    /**
+     * Recorre la list desde el primer nodo (cabeza) y muestra los caracteres.
+     */
+    public void mostrarLista() {
+        if (this.cabeza == null) {
+            System.out.println("La lista está vacía.");
+            return;
+        }
+
+        System.out.print("Lista de caracteres ordenada: ");
+        NodoDoble actual = this.cabeza;
+        StringBuilder sb = new StringBuilder();
+        while (actual != null) {
+            sb.append(actual.caracter);
+            if (actual.siguiente != null) {
+                sb.append(" -> ");
+            }
+            actual = actual.siguiente;
+        }
+        System.out.println(sb.toString());
+    }
+}
+```
+### Principal
+```javascript
+package Actividad5;
+import java.util.Scanner;
+
+
+/**
+ *
+ * @author angellunaperez
+ * En esta clase se prueban
+ * los metodos declarados en la otra clase
+ */
+
+
+public class Principal {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ListaDobleCaracteres lista = new ListaDobleCaracteres();
+
+        // --- Tarea 1: Lectura de cadena desde teclado ---
+        System.out.println(" LISTA DOBLEMENTE ENLAZADA Y ORDENAMIENTO ALFABÉTICO");
+        System.out.println("-------------------------------------------------------");
+        System.out.print("Ingrese una cadena de texto: ");
+        String cadena = scanner.nextLine().trim();
+
+        // --- Tarea 2: Construcción de lista doblemente enlazada ---
+        if (cadena.isEmpty()) {
+            System.out.println("No se ingresó ninguna cadena.");
+        } else {
+            // Extraer cada carácter y construir la lista
+            System.out.println("\n Construyendo la lista...");
+            for (int i = 0; i < cadena.length(); i++) {
+                char c = Character.toLowerCase(cadena.charAt(i)); // Convertir a minúscula para ordenamiento simple
+                if (c != ' ') { // Opcional: Ignorar espacios para ordenamiento solo de letras
+                    lista.insertarAlFinal(c);
+                }
+            }
+            
+            // --- Tarea 3: Ordenamiento alfabético ---
+            System.out.println("Ordenando la lista por inserción...");
+            lista.ordenarLista();
+
+            // --- Tarea 4: Mostrar lista ordenada ---
+            System.out.println("\n-------------------------------------------------------");
+            lista.mostrarLista();
+            System.out.println("-------------------------------------------------------");
+        }
+
+        scanner.close();
+    }
+}
+```
 
 
