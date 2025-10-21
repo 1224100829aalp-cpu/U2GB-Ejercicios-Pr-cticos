@@ -1,1 +1,1 @@
-# U2GB-Ejercicios-Pr-cticos
+# U2GB-Ejercicios-Practicos
