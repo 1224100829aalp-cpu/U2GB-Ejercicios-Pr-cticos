@@ -188,7 +188,7 @@ public class Principal {
         // --- Tarea 3: Eliminar nodos ---
         int limite = 0;
         try {
-            System.out.print("\n➡️ Ingrese el valor limite. Se eliminarán los nodos MAYORES a este valor: ");
+            System.out.print("\n Ingrese el valor limite. Se eliminarán los nodos MAYORES a este valor: ");
             limite = scanner.nextInt();
         } catch (java.util.InputMismatchException e) {
             System.out.println("Entrada no valida");
