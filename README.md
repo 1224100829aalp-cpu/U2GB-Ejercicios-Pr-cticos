@@ -687,5 +687,191 @@ public class Principal {
     }
 }
 ```
+## Actividad 04: Polinomio con Lista Enlazada Circular
+### Nodo
+```javascript
+package Actividad4;
+
+/**
+ *
+ * @author angellunaperez
+ * Esta clase usa la misma 
+ * estructura de nodo que la 
+ * acitivida 3 solo 
+ * la forma de conexion cambia
+ */
+
+public class Nodo {
+    public double coeficiente;
+    public int exponente;
+    public Nodo siguiente;
+
+    public Nodo(double coeficiente, int exponente) {
+        this.coeficiente = coeficiente;
+        this.exponente = null; // En la circular, el enlace se gestiona en la lista
+    }
+}
+```
+### PolinomioListaCircular
+```javascript
+package Actividad4;
+import java.util.Scanner;
+
+/**
+ *
+ * @author angellunaperez
+ * 
+ * Esta clase representa el polinomio
+ * mediante una lista enlazada circular
+ */
+ 
+
+
+public class PolinomioListaCircular {
+    private Nodo ultimo; 
+
+    public PolinomioListaCircular() {
+        this.ultimo = null; // La lista inicia vacía
+    }
+
+    // --- Tarea 3: Entrada del polinomio (Insertar al final) ---
+    public void agregarTermino(double coeficiente, int exponente) {
+        if (coeficiente == 0) return;
+
+        Nodo nuevoNodo = new Nodo(coeficiente, exponente);
+
+        if (this.ultimo == null) {
+            // Caso 1: Lista vacía. El nodo es el único y se apunta a sí mismo.
+            this.ultimo = nuevoNodo;
+            nuevoNodo.siguiente = nuevoNodo; // Tarea 2: Forma el ciclo
+        } else {
+            // Caso 2: Insertar después del último nodo.
+            nuevoNodo.siguiente = this.ultimo.siguiente; // El nuevo nodo apunta al primero
+            this.ultimo.siguiente = nuevoNodo;          // El último apunta al nuevo
+            this.ultimo = nuevoNodo;                    // El nuevo nodo es ahora el último
+        }
+    }
+
+    // --- Tarea 4: Recorrido circular ---
+    public void recorrerYMostrar() {
+        if (this.ultimo == null) {
+            System.out.println("P(x) = 0 (Lista vacía)");
+            return;
+        }
+
+        System.out.print("P(x) = ");
+        // Tarea 4: Partir del nodo siguiente al último (es decir, el primer nodo)
+        Nodo actual = this.ultimo.siguiente; 
+        
+        do {
+            // Formato simple para la salida
+            if (actual != this.ultimo.siguiente) {
+                 if (actual.coeficiente > 0) {
+                    System.out.print(" + ");
+                } else if (actual.coeficiente < 0) {
+                    System.out.print(" - ");
+                }
+            }
+
+            double absCoeff = Math.abs(actual.coeficiente);
+            
+            if (actual.exponente == 0) {
+                System.out.print(absCoeff);
+            } else if (actual.exponente == 1) {
+                System.out.print(absCoeff + "x");
+            } else {
+                System.out.print(absCoeff + "x^" + actual.exponente);
+            }
+            
+            actual = actual.siguiente;
+        } while (actual != this.ultimo.siguiente); // Tarea 4: Detener al volver al nodo inicial
+        
+        System.out.println();
+    }
+    
+    // Método de utilidad para la evaluación (tomado de la actividad anterior)
+    public double evaluar(double x) {
+        if (this.ultimo == null) return 0.0;
+        
+        double resultado = 0.0;
+        Nodo actual = this.ultimo.siguiente;
+
+        do {
+            resultado += actual.coeficiente * Math.pow(x, actual.exponente);
+            actual = actual.siguiente;
+        } while (actual != this.ultimo.siguiente);
+        
+        return resultado;
+    }
+}
+```
+### Principal
+```javascript
+package Actividad4;
+import java.util.Scanner;
+
+
+/**
+ *
+ * @author angellunaperez
+ *  * Clase principal para la entrada
+ * de datos y presentación de 
+ * resultados.
+ */
+
+public class Principal {
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        // Usamos la nueva implementación circular
+        PolinomioListaCircular polinomio = new PolinomioListaCircular(); 
+
+        // --- Tarea 3: Entrada del polinomio ---
+        System.out.println("POLINOMIO CON LISTA ENLAZADA CIRCULAR");
+        System.out.println("------------------------------------------------------------------");
+        System.out.println("Ingrese los términos (coeficiente exponente). '0 0' para terminar.");
+
+        while (true) {
+            System.out.print("Término (ej. 3 -4, 2): ");
+            String linea = scanner.nextLine().trim();
+
+            if (linea.isEmpty() || linea.equals("0 0")) {
+                break;
+            }
+
+            try {
+                String[] partes = linea.split("\\s+"); 
+                if (partes.length < 2) continue;
+                
+                double coef = Double.parseDouble(partes[0]);
+                int exp = Integer.parseInt(partes[1]);
+                
+                polinomio.agregarTermino(coef, exp); // Inserción circular
+                
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Formato de número incorrecto.");
+            }
+        }
+        
+        System.out.println("\n------------------------------------------------------------------");
+        System.out.println("Polinomio representado (Recorrido Circular):");
+        
+        // Tarea 4: Recorrido e impresión
+        polinomio.recorrerYMostrar(); 
+        System.out.println("------------------------------------------------------------------");
+
+
+        // --- Evaluación (Opcional, para demostrar la funcionalidad) ---
+        System.out.println("\nEvaluando P(x) en x=2.0:");
+        double x_val = 2.0;
+        double resultado = polinomio.evaluar(x_val);
+        System.out.printf("P(%.1f) = %.2f%n", x_val, resultado);
+
+        scanner.close();
+    }
+}
+
+```
+
 
 
