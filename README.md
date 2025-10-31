@@ -1,7 +1,7 @@
 # U2GB-Ejercicios-Practicos
 | No de Actividad | Listas | Pilas | Colas |
 | -- | -- | -- | -- |
-| Actividad 01 | | | |
+| Actividad 01 | [Actividad 01](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-01-manipulación-de-lista-enlazada) | | |
 | Actividad 02 | | | |
 | Actividad 03 | | | |
 | Actividad 04 | | | |
