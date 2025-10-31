@@ -1,4 +1,15 @@
 # U2GB-Ejercicios-Practicos
+| No de Actividad | Listas | Pilas | Colas |
+| -- | -- | -- | -- |
+| Actividad 01 | | | |
+| Actividad 02 | | | |
+| Actividad 03 | | | |
+| Actividad 04 | | | |
+| Actividad 05 | | | |
+
+
+
+
 ## Actividad 01: Manipulación de Lista Enlazada
 ### Nodo
 ```javascript
