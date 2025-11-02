@@ -969,14 +969,38 @@ package Actividad5;
  */
 
 public class NodoDoble {
-    public char caracter;
-    public NodoDoble anterior; // Puntero al predecesor
-    public NodoDoble siguiente; // Puntero al sucesor
+    private char caracter;
+    private NodoDoble anterior; // Puntero al predecesor
+    private NodoDoble siguiente; // Puntero al sucesor
 
     public NodoDoble(char caracter) {
         this.caracter = caracter;
         this.anterior = null;
         this.siguiente = null;
+    }
+
+    public char getCaracter() {
+        return caracter;
+    }
+
+    public void setCaracter(char caracter) {
+        this.caracter = caracter;
+    }
+
+    public NodoDoble getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(NodoDoble anterior) {
+        this.anterior = anterior;
+    }
+
+    public NodoDoble getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(NodoDoble siguiente) {
+        this.siguiente = siguiente;
     }
 }
 ```
