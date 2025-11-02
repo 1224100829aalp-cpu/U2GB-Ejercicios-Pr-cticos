@@ -20,15 +20,30 @@ package Actividad1;
  * la lista enlazada simple.
  */
 public class Nodo {
-    public int dato;
-    public Nodo siguiente;
+    // Variables de instancia privadas para aplicar el encapsulamiento
+    private int dato;
+    private Nodo siguiente;
 
     /**
      * Constructor para crear un nuevo nodo.
-    */
+     */
     public Nodo(int dato) {
         this.dato = dato;
         this.siguiente = null; // no apunta a ningún otro nodo
+    }
+
+    public int getDato() {
+        return dato;
+    }
+    public Nodo getSiguiente() {
+        return siguiente;
+    }
+    public void setDato(int dato) {
+        this.dato = dato;
+    }
+
+    public void setSiguiente(Nodo siguiente) {
+        this.siguiente = siguiente;
     }
 }
 ```
