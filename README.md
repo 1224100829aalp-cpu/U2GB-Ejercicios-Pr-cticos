@@ -1,16 +1,14 @@
 # U2GB-Ejercicios-Practicos
-| No de Actividad | Listas | Pilas | Colas |
-| -- | -- | -- | -- |
-| Actividad 01 | [Actividad 01 Manipulación de Lista Enlazada](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-01-manipulación-de-lista-enlazada) | [Actividad 01]() | [Actividad 01]()|
-| Actividad 02 | [Actividad 02 Lista Enlazada de Palabras desde Archivo](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-02-lista-enlazada-de-palabras-desde-archivo) |[Actividad 02]() | [Actividad 02]()|
-| Actividad 03 | [Actividad 03 Representación y Evaluación de Polinomios con Listas Enlazadas](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-03-representación-y-evaluación-de-polinomios-con-listas-enlazadas)| | |
-| Actividad 04 | [Actividad 04 Polinomio con Lista Enlazada Circular](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-04-polinomio-con-lista-enlazada-circular)| | |
-| Actividad 05 | [Actividad 05 Lista Doblemente Enlazada de Caracteres](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-05-lista-doblemente-enlazada-de-caracteres) | | |
+| No de Actividad | Listas | Pilas y Colas
+| -- | -- | -- |
+| Ejercicio 01 | [Ejercicio 01 Manipulación de Lista Enlazada](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-01-manipulación-de-lista-enlazada) | [Ejercicio 01 Simulacion simple de Pila]() |
+| Ejercicio 02 | [Ejercicio 02 Lista Enlazada de Palabras desde Archivo](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-02-lista-enlazada-de-palabras-desde-archivo) |[Ejercicio 02 Pila de Nombres]() |
+| Ejercicio 03 | [Ejercicio 03 Representación y Evaluación de Polinomios con Listas Enlazadas](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-03-representación-y-evaluación-de-polinomios-con-listas-enlazadas)|  [Actividad 03 Verificacion de Pila Vacia]() | 
+| Ejercicio 04 | [Ejercicio 04 Polinomio con Lista Enlazada Circular](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-04-polinomio-con-lista-enlazada-circular)| [Ejercicio 04 Comparacion de Colas ]() | 
+| Ejercicio 05 | [Ejercicio 05 Lista Doblemente Enlazada de Caracteres](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-05-lista-doblemente-enlazada-de-caracteres) | [Ejercicio 05]() |
 
 
-
-
-## Actividad 01: Manipulación de Lista Enlazada
+## Ejercicio 01: Manipulación de Lista Enlazada
 ### Nodo
 ```javascript
 package Actividad1;
@@ -217,7 +215,7 @@ public class Principal {
     }
 }
 ```
-## Actividad 02: Lista Enlazada de Palabras desde Archivo
+## Ejercicio 02: Lista Enlazada de Palabras desde Archivo
 ### Nodo
 ```javascript
 package Actividad2;
@@ -487,7 +485,7 @@ public class Principal {
     }
 }
 ```
-## Actividad 03: Representación y Evaluación de Polinomios con Listas Enlazadas
+## Ejercicio 03: Representación y Evaluación de Polinomios con Listas Enlazadas
 ### Nodo
 ```javascript
 package Actividad3;
@@ -651,7 +649,7 @@ public class Principal {
                 // Dividir la línea en coeficiente y exponente
                 String[] partes = linea.split("\\s+"); 
                 if (partes.length < 2) {
-                    System.out.println("⚠️ Formato incorrecto. Intente de nuevo (ej. 5 2).");
+                    System.out.println("Formato incorrecto. Intente de nuevo (ej. 5 2).");
                     continue;
                 }
                 
@@ -662,18 +660,18 @@ public class Principal {
                 polinomio.agregarTermino(coef, exp);
                 
             } catch (NumberFormatException e) {
-                System.out.println("⚠️ Error: Asegúrese de que el coeficiente sea un número y el exponente un entero.");
+                System.out.println("Error: Asegúrese de que el coeficiente sea un número y el exponente un entero.");
             }
         }
         
-        System.out.println("\n------------------------------------------------------------------");
+        System.out.println("\n--------------------------------------------------------------");
         System.out.println("Polinomio ingresado y representado:");
         System.out.println(polinomio.toString());
-        System.out.println("------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------");
 
 
         // --- Tarea 3: Evaluación y Tabla de Valores ---
-        System.out.println("\n📊 TABLA DE EVALUACIÓN P(x) de x = 0.0 hasta x = 5.0 (incremento 0.5)");
+        System.out.println("\n TABLA DE EVALUACIÓN P(x) de x = 0.0 hasta x = 5.0 (incremento 0.5)");
         System.out.printf("%-10s | %s%n", "x", "P(x)");
         System.out.println("-----------|-----------");
 
@@ -682,7 +680,7 @@ public class Principal {
         final double INCREMENTO = 0.5;
 
         for (double x = VALOR_INICIO; x <= VALOR_FIN; x += INCREMENTO) {
-            // Asegurar que 5.0 se incluya a pesar de posibles errores de punto flotante
+            // asegurar que 5.0 se incluya a pesar de posibles errores de punto flotante
             if (x > VALOR_FIN) x = VALOR_FIN; 
             
             double resultado = polinomio.evaluar(x);
@@ -698,7 +696,7 @@ public class Principal {
     }
 }
 ```
-## Actividad 04: Polinomio con Lista Enlazada Circular
+## Ejercicio 04: Polinomio con Lista Enlazada Circular
 ### Nodo
 ```javascript
 package Actividad4;
@@ -758,8 +756,8 @@ public class PolinomioListaCircular {
         } else {
             // Caso 2: Insertar después del último nodo.
             nuevoNodo.siguiente = this.ultimo.siguiente; // El nuevo nodo apunta al primero
-            this.ultimo.siguiente = nuevoNodo;          // El último apunta al nuevo
-            this.ultimo = nuevoNodo;                    // El nuevo nodo es ahora el último
+            this.ultimo.siguiente = nuevoNodo;       // El último apunta al nuevo
+            this.ultimo = nuevoNodo;                 // El nuevo nodo es ahora el último
         }
     }
 
@@ -839,7 +837,7 @@ public class Principal {
 
         // --- Tarea 3: Entrada del polinomio ---
         System.out.println("POLINOMIO CON LISTA ENLAZADA CIRCULAR");
-        System.out.println("------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------");
         System.out.println("Ingrese los términos (coeficiente exponente). '0 0' para terminar.");
 
         while (true) {
@@ -883,7 +881,7 @@ public class Principal {
 }
 
 ```
-## Actividad 05: Lista Doblemente Enlazada de Caracteres
+## Ejercicio 05: Lista Doblemente Enlazada de Caracteres
 ### NodoDoble
 ```javascript
 package Actividad5;
@@ -1081,5 +1079,206 @@ public class Principal {
     }
 }
 ```
+
+## Ejercicio 01
+### Simulacion Simple de Pila
+```javascript
+package SimulacionSimpledePila;
+
+
+import java.util.Stack;
+
+/* @author angellunaperez
+*En Esta clase se crea una pila vacia usando el 
+*import java util stack, despues se le agregan 
+*valores y despues se usa la logica principal de la pila 
+*aprendida en claseque es LIFO (last in first out).
+ */
+public class Ejercicio1 {
+
+    public static void main(String[] args) {
+        // 1-Crear una pila vacía
+        Stack<Integer> pila = new Stack<>();
+        System.out.println("Pila creada: " + pila);
+
+        // 2- Insertar 5, 10, 15 y 20
+        pila.push(5);
+        pila.push(10);
+        pila.push(15);
+        pila.push(20);
+        System.out.println("Después de insertar (5, 10, 15, 20): " + pila);
+
+        //3- Eliminar dos elementos (LIFO: se eliminan los últimos insertados)
+        Integer elementoEliminado1 = pila.pop(); // elimina 20
+        Integer elementoEliminado2 = pila.pop(); // elimina 15
+        System.out.println("Elemento eliminado 1 (pop): " + elementoEliminado1);
+        System.out.println("Elemento eliminado 2 (pop): " + elementoEliminado2);
+
+        // 4- Mostrar contenido
+        System.out.println("\nContenido actual: " + pila);
+    }
+}
+
+
+```
+
+## Ejercicio 02 
+### Pila de Nombres 
+```javascript
+package Ejercicio02;
+import java.util.Scanner;
+import java.util.Stack;
+
+/**
+ *
+ * @author angellunaperez
+ * Esta clase utiliza un bucle while para leer los nombres ingresados
+ * por el usuario y la operación push para apilarlos; 
+ * luego, un segundo bucle while usa la operación pop para 
+ * desapilarlos e imprimirlos, lo que automáticamente resulta 
+ * en el orden inverso al de la entrada.
+ */
+
+public class PiladeNombres {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        //  Crear una pila para almacenar nombres
+        Stack<String> pila = new Stack<>();
+        String nombre;
+
+        System.out.println("--- nombres ---");
+        // Leer nombres hasta escribir 'FIN' y apilar cada nombre
+        while (true) {
+            System.out.print("Ingrese un nombre (o escriba 'FIN' para acabar): ");
+            nombre = sc.nextLine();
+
+            // Condición de parada
+            if (nombre.equalsIgnoreCase("FIN")) {
+                break;
+            }
+
+            // 3 Apilar el nombre usando push
+            pila.push(nombre);
+        }
+
+        System.out.println("\n--- nombres en orden inverso ---");
+        // 4. Desapilar e imprimir en orden inverso (LIFO)
+        while (!pila.isEmpty()) {
+            // pop() elimina y devuelve el elemento superior (el último en entrar)
+            System.out.println(pila.pop());
+        }
+
+        sc.close();
+    }
+}
+```
+## Ejercicio 03
+### Verificacion de Lista VAcia
+```javascript
+package Ejercicio03;
+import java.util.Stack;
+
+/*
+ *
+ * @author angellunaperez
+ * Como aprendido en clase
+ * El método isEmpty() de la clase Stack es la forma
+ * estándar de determinar si la pila contiene o no elementos.
+ */
+
+import java.util.Stack;
+
+public class ListaVacia {
+    public static void main(String[] args) {
+        // 1- Crear pila vacía
+        Stack<Integer> pila = new Stack<>();
+        System.out.println("Paso 1: Pila recién creada.");
+
+        // 2 -Usar método isEmpty()
+        // La pila está vacía, debe retornar 'true'.
+        System.out.println("¿Está vacía la pila? " + pila.isEmpty());
+
+        // Insertar un elemento para cambiar el estado de la pila
+        pila.push(1);
+        System.out.println("Paso 2: Se insertó el elemento '1'. Contenido: " + pila);
+
+        // Volver a usar el método isEmpty()
+        // La pila ya no está vacía, debe retornar 'false'.
+        System.out.println("¿Está vacía la pila? " + pila.isEmpty());
+    }
+}
+
+```
+## Ejercicio 04
+### Comparacion de Colas
+```javascript
+
+package Ejercicio04;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+/* @author angellunaperez
+Esta clase compara dos colas para ver si son identicas y 
+despues restaura las colas 
+originales después de la comparación. 
+ */
+
+public class ComparacionColas {
+
+    public static <T> boolean sonColasIdenticas(Queue<T> q1, Queue<T> q2) {
+        // 1 Si los tamaños son diferentes, no pueden ser iguales.
+        if (q1.size() != q2.size()) {
+            return false;
+        }
+        Queue<T> aux1 = new LinkedList<>();
+        Queue<T> aux2 = new LinkedList<>();
+        boolean sonIguales = true;
+        int size = q1.size();
+        
+        // 3. Recorrer, comparar y guardar en las auxiliares.
+        for (int i = 0; i < size; i++) {
+            // Extraer elemento de cada cola (destructivo)
+            T elemento1 = q1.poll();
+            T elemento2 = q2.poll();
+
+            // Comparar los elementos extraídos
+            if (!elemento1.equals(elemento2)) {
+                sonIguales = false;
+            }
+            
+            // Guardar en las colas auxiliares
+            aux1.offer(elemento1);
+            aux2.offer(elemento2);
+        }
+
+        // Restaurar el estado original
+        while (!aux1.isEmpty()) {
+            q1.offer(aux1.poll());
+            q2.offer(aux2.poll()); // Se asume que aux1 y aux2 tienen el mismo tamaño
+        }
+
+        // Devolver el resultado de la comparación
+        return sonIguales;
+    }
+
+    // --- Método Principal para la Prueba ---
+    public static void main(String[] args) {
+        Queue<Integer> c1 = new LinkedList<>();
+        c1.offer(1); c1.offer(2);
+        Queue<Integer> c2 = new LinkedList<>();
+        c2.offer(1); c2.offer(2);
+        Queue<Integer> c3 = new LinkedList<>();
+        c3.offer(2); c3.offer(1); // Diferente orden
+
+        System.out.println("C1 vs C2 (Iguales): " + sonColasIdenticas(c1, c2));
+        System.out.println("C1 vs C3 (Diferente orden): " + sonColasIdenticas(c1, c3));
+        
+        // Comprobar que C1 sigue igual despues de la función
+        System.out.println("Estado final de C1: " + c1); 
+    }
+}
+```
+
 
 
