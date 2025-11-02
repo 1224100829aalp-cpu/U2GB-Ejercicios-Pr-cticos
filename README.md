@@ -5,7 +5,7 @@
 | Ejercicio 02 | [Ejercicio 02 Lista Enlazada de Palabras desde Archivo](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-02-lista-enlazada-de-palabras-desde-archivo) |[Ejercicio 02 Pila de Nombres]() |
 | Ejercicio 03 | [Ejercicio 03 Representación y Evaluación de Polinomios con Listas Enlazadas](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-03-representación-y-evaluación-de-polinomios-con-listas-enlazadas)|  [Actividad 03 Verificacion de Pila Vacia]() | 
 | Ejercicio 04 | [Ejercicio 04 Polinomio con Lista Enlazada Circular](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-04-polinomio-con-lista-enlazada-circular)| [Ejercicio 04 Comparacion de Colas ]() | 
-| Ejercicio 05 | [Ejercicio 05 Lista Doblemente Enlazada de Caracteres](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-05-lista-doblemente-enlazada-de-caracteres) | [Ejercicio 05]() |
+| Ejercicio 05 | [Ejercicio 05 Lista Doblemente Enlazada de Caracteres](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#actividad-05-lista-doblemente-enlazada-de-caracteres) | [Ejercicio 05 Supermercado Colas]() |
 
 
 ## Ejercicio 01: Manipulación de Lista Enlazada
@@ -1276,6 +1276,141 @@ public class ComparacionColas {
         
         // Comprobar que C1 sigue igual despues de la función
         System.out.println("Estado final de C1: " + c1); 
+    }
+}
+```
+## Ejercicio 05
+### Simulaciond de Supermercado
+```javascript
+package Ejercicio05;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+/*author: angellunaperez
+El metodo simula el flujo de 10 clientes
+a traves del sistema de carritos y cajas, 
+decidiendo la cola más corta al pagar.*/
+
+public class Supermercado {
+
+    // Consantes del sistema
+    private static final int TOTAL_CARROS = 25;
+    private static final int NUM_CAJAS = 3;
+
+    public static void main(String[] args) {
+        // Pila para carritos disponibles (usando LIFO)
+        Stack<String> carritosDisponibles = new Stack<>();
+        for (int i = 1; i <= TOTAL_CARROS; i++) {
+            carritosDisponibles.push("C" + i);
+        }
+
+        // Colas para las 3 cajas (FIFO)
+        Queue<String>[] cajas = new LinkedList[NUM_CAJAS];
+        for (int i = 0; i < NUM_CAJAS; i++) {
+            cajas[i] = new LinkedList<>();
+        }
+
+        // Cola de espera de clientes al inicio (si no hay carritos)
+        Queue<String> colaEsperaCarrito = new LinkedList<>();
+
+        // Simulación de 10 clientes
+        int numClientes = 10;
+        int carritosOcupados = 0;
+
+        System.out.println("--- incio de simulacion ---");
+
+        // 1. Asignación de carritos a 10 clientes
+        for (int i = 1; i <= numClientes; i++) {
+            String cliente = "Cliente " + i;
+
+            if (!carritosDisponibles.isEmpty()) {
+                // El cliente toma un carrito y lo ocupa
+                String carrito = carritosDisponibles.pop();
+                carritosOcupados++;
+                System.out.println(cliente + " toma el " + carrito + ". Carritos ocupados: " + carritosOcupados);
+                
+                // 2. Cliente busca la caja más corta
+                int cajaElegida = buscarCajaMasCorta(cajas);
+                cajas[cajaElegida].offer(cliente);
+                System.out.println("  -> " + cliente + " se coloca en la Caja " + (cajaElegida + 1) + ".");
+
+            } else {
+                // No hay carritos, el cliente espera en la entrada
+                colaEsperaCarrito.offer(cliente);
+                System.out.println(cliente + " espera: no hay carritos disponibles.");
+            }
+        }
+        
+        System.out.println("\n--- proceso de pago (Desencolando de Cajas) ---");
+        
+        //  proceso de pago y liberación de carritos
+        int clientesPagados = 0;
+        // se itera hasta que todas las cajas estén vacías (o hasta que todos los clientes hayan pasado)
+        while (clientesPagados < numClientes) {
+            
+            // Se buscar una caja que tenga clientes
+            int cajaAprocesar = -1;
+            int minClientes = Integer.MAX_VALUE;
+            
+            // Logica simple de round-robin para simular un paso de tiempo
+            for (int i = 0; i < NUM_CAJAS; i++) {
+                 if (!cajas[i].isEmpty() && cajas[i].size() < minClientes) {
+                    minClientes = cajas[i].size();
+                    cajaAprocesar = i;
+                }
+            }
+
+            if (cajaAprocesar != -1) {
+                String clienteAtendido = cajas[cajaAprocesar].poll();
+                clientesPagados++;
+                carritosOcupados--;
+                
+                // la iberacion del carrito (vuelve a la pila)
+                String carritoLiberado = "C-Liberado"; // No guardamos el id original, solo simulación
+                carritosDisponibles.push(carritoLiberado);
+                
+                System.out.println("Caja " + (cajaAprocesar + 1) + " atiende a " + clienteAtendido + " y libera un carrito, Carritos ocupados: " + carritosOcupados);
+                
+                // si habiaa clientes esperando uno toma el carrito liberado
+                if (!colaEsperaCarrito.isEmpty()) {
+                    String clienteEsperando = colaEsperaCarrito.poll();
+                    String nuevoCarrito = carritosDisponibles.pop(); // Toma el recién liberado
+                    carritosOcupados++;
+                    
+                    System.out.println("  -> " + clienteEsperando + " toma el " + nuevoCarrito + ".");
+                    
+                    // Se va a la caja más corta
+                    int cajaElegida = buscarCajaMasCorta(cajas);
+                    cajas[cajaElegida].offer(clienteEsperando);
+                    System.out.println("  -> " + clienteEsperando + " se va a la Caja " + (cajaElegida + 1) + ".");
+                }
+            } else if (colaEsperaCarrito.isEmpty()){
+                // No quedan clientes en las cajas ni esperando carritos.
+                break;
+            } else {
+                // Si solo quedan clientes esperando carrito, no podemos avanzar.
+                break;
+            }
+        }
+        
+        System.out.println("\n--- fin de la simulacion ---");
+        System.out.println("el total de clientes atendidos: " + clientesPagados);
+        System.out.println("los carritos disponibles al final: " + carritosDisponibles.size());
+    }
+
+    private static int buscarCajaMasCorta(Queue<String>[] cajas) {
+        int indiceMasCorto = 0;
+        int minSize = Integer.MAX_VALUE;
+
+        for (int i = 0; i < cajas.length; i++) {
+            if (cajas[i].size() < minSize) {
+                minSize = cajas[i].size();
+                indiceMasCorto = i;
+            }
+        }
+        return indiceMasCorto;
     }
 }
 ```
