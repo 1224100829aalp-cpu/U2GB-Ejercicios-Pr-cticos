@@ -243,12 +243,28 @@ package Actividad2;
  * conteniendo una palabra.
  */
 public class Nodo {
-    public String palabra;
-    public Nodo siguiente;
+    private String palabra;
+    private Nodo siguiente;
 
     public Nodo(String palabra) {
         this.palabra = palabra;
         this.siguiente = null;
+    }
+
+    public String getPalabra() {
+        return palabra;
+    }
+
+    public Nodo getSiguiente() {
+        return siguiente;
+    }
+
+    public void setPalabra(String palabra) {
+        this.palabra = palabra;
+    }
+
+    public void setSiguiente(Nodo siguiente) {
+        this.siguiente = siguiente;
     }
 }
 ```
