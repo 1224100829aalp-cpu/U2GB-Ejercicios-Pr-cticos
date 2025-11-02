@@ -529,19 +529,43 @@ package Actividad3;
  */
 
 public class Nodo {
-    public double coeficiente;
-    public int exponente;
-    public Nodo siguiente;
+    private double coeficiente;
+    private int exponente;
+    private Nodo siguiente;
 
     /**
      * Constructor para crear un nuevo termino.
-     *  El coeficiente numerico del término
+     * El coeficiente numerico del término
      * El exponente entero del término
      */
     public Nodo(double coeficiente, int exponente) {
         this.coeficiente = coeficiente;
         this.exponente = exponente;
         this.siguiente = null;
+    }
+
+    public double getCoeficiente() {
+        return coeficiente;
+    }
+
+    public void setCoeficiente(double coeficiente) {
+        this.coeficiente = coeficiente;
+    }
+
+    public int getExponente() {
+        return exponente;
+    }
+
+    public void setExponente(int exponente) {
+        this.exponente = exponente;
+    }
+
+    public Nodo getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(Nodo siguiente) {
+        this.siguiente = siguiente;
     }
 }
 ```
