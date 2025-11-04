@@ -1,11 +1,11 @@
 # U2GB-Ejercicios-Practicos
-| No de Actividad | Listas | Pilas y Colas
-| -- | -- | -- |
-| Ejercicio 01 | [Ejercicio 01 Manipulación de Lista Enlazada](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-01-manipulación-de-lista-enlazada) | [Ejercicio 01 Simulacion simple de Pila](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-01) |
-| Ejercicio 02 | [Ejercicio 02 Lista Enlazada de Palabras desde Archivo](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-02-lista-enlazada-de-palabras-desde-archivo) |[Ejercicio 02 Pila de Nombres](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-02) |
+| No de Actividad | Listas | Pilas | Colas| 
+| -- | -- | -- | -- |
+| Ejercicio 01 | [Ejercicio 01 Manipulación de Lista Enlazada](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-01-manipulación-de-lista-enlazada) | [Ejercicio 01 Simulacion simple de Pila](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-01) | [Ejercicio 01 Comparacion de Colas ](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-04) |
+| Ejercicio 02 | [Ejercicio 02 Lista Enlazada de Palabras desde Archivo](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-02-lista-enlazada-de-palabras-desde-archivo) |[Ejercicio 02 Pila de Nombres](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-02) |[Ejercicio 02 Supermercado Colas](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-05) |
 | Ejercicio 03 | [Ejercicio 03 Representación y Evaluación de Polinomios con Listas Enlazadas](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#ejercicio-03-representación-y-evaluación-de-polinomios-con-listas-enlazadas)|  [Ejercicio 03 Verificacion de Pila Vacia](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-03) | 
-| Ejercicio 04 | [Ejercicio 04 Polinomio con Lista Enlazada Circular](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#ejercicio-04-polinomio-con-lista-enlazada-circular)| [Ejercicio 04 Comparacion de Colas ](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-04) | 
-| Ejercicio 05 | [Ejercicio 05 Lista Doblemente Enlazada de Caracteres](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#ejercicio-05-lista-doblemente-enlazada-de-caracteres) | [Ejercicio 05 Supermercado Colas](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-05) |
+| Ejercicio 04 | [Ejercicio 04 Polinomio con Lista Enlazada Circular](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#ejercicio-04-polinomio-con-lista-enlazada-circular)| | 
+| Ejercicio 05 | [Ejercicio 05 Lista Doblemente Enlazada de Caracteres](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#ejercicio-05-lista-doblemente-enlazada-de-caracteres) | |
 
 
 ## Ejercicio 01: Manipulación de Lista Enlazada
