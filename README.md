@@ -3,7 +3,7 @@
 | -- | -- | -- | -- |
 | Ejercicio 01 | [Ejercicio 01 Manipulación de Lista Enlazada](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-01-manipulación-de-lista-enlazada) | [Ejercicio 01 Simulacion simple de Pila](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-01) | [Ejercicio 01 Comparacion de Colas ](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-01-1) |
 | Ejercicio 02 | [Ejercicio 02 Lista Enlazada de Palabras desde Archivo](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-02-lista-enlazada-de-palabras-desde-archivo) |[Ejercicio 02 Pila de Nombres](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-02) |[Ejercicio 02 Supermercado Colas](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-02-1) |
-| Ejercicio 03 | [Ejercicio 03 Representación y Evaluación de Polinomios con Listas Enlazadas](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#ejercicio-03-representación-y-evaluación-de-polinomios-con-listas-enlazadas)|  [Ejercicio 03 Verificacion de Pila Vacia](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-03) | 
+| Ejercicio 03 | [Ejercicio 03 Representación y Evaluación de Polinomios con Listas Enlazadas](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#ejercicio-03-representación-y-evaluación-de-polinomios-con-listas-enlazadas)|  [Ejercicio 03 Verificacion de Pila Vacia](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/tree/main#ejercicio-03) | [Ejercicio 03 |
 | Ejercicio 04 | [Ejercicio 04 Polinomio con Lista Enlazada Circular](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#ejercicio-04-polinomio-con-lista-enlazada-circular)| | 
 | Ejercicio 05 | [Ejercicio 05 Lista Doblemente Enlazada de Caracteres](https://github.com/1224100829aalp-cpu/U2GB-Ejercicios-Pr-cticos/blob/main/README.md#ejercicio-05-lista-doblemente-enlazada-de-caracteres) | |
 
@@ -1512,6 +1512,114 @@ public class Supermercado {
     }
 }
 ```
+## Ejercicio 03
+### Simulacion Atencion al cliente 
+```javascript
+package Ejercicio03;
 
+/**
+ *
+ * @author angellunaperez
+ * Esta clase simula  el flujo de atención durante 7 horas considerando:
+• Una fila única de clientes.
+• 3 cajas activas, con posibilidad de abrir una cuarta caja si hay más de 20 clientes.
+• Tiempos de atención distribuidos uniformemente por caja.
+• Llegadas de clientes cada minuto (en promedio).
+ */
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SimulacionSupermercado {
+
+    private static final int tiempototalmintos = 7 * 60; 
+    private static final int cajasiniciales = 3;
+    private static final int caja4 = 20; 
+    
+    private static final int atencionmin = 2; 
+    private static final int atencionmax = 5;
+
+    public static void main(String[] args) {
+        Queue<Integer> filaClientes = new LinkedList<>(); 
+        
+        List<Integer> tiempoCajas = new ArrayList<>();
+        for (int i = 0; i < cajasiniciales; i++) {
+            tiempoCajas.add(0);
+        }
+
+        Random random = new Random();
+
+        int totalClientesAtendidos = 0;
+        int maximoTamanioFila = 0;
+        long sumaTamanioFila = 0;
+        int tiempoMaximoEspera = 0;
+        int tiempoAperturaCaja4 = -1; 
+        boolean caja4Abierta = false;
+
+        System.out.println("inicio ");
+        System.out.println("duracion: " + tiempototalmintos + " minutos (" + (tiempototalmintos / 60) + " horas)\n");
+
+        for (int minutoActual = 1; minutoActual <= tiempototalmintos; minutoActual++) {
+     
+            int tiempoLlegada = minutoActual;
+            filaClientes.add(tiempoLlegada);
+
+            if (!caja4Abierta && filaClientes.size() > caja4) {
+                tiempoCajas.add(0);
+                tiempoAperturaCaja4 = minutoActual;
+                caja4Abierta = true;
+                System.out.println(">>> Minuto " + minutoActual + ": ¡! Se abre la cuarta caja. Clientes en fila: " + filaClientes.size());
+            }
+
+            for (int i = 0; i < tiempoCajas.size(); i++) {
+                int tiempoRestante = tiempoCajas.get(i);
+
+                if (tiempoRestante > 0) {
+                    tiempoCajas.set(i, tiempoRestante - 1);
+                } else if (!filaClientes.isEmpty()) {
+                    int clienteLlegada = filaClientes.poll();
+                    
+                    int tiempoEspera = minutoActual - clienteLlegada;
+                    if (tiempoEspera > tiempoMaximoEspera) {
+                        tiempoMaximoEspera = tiempoEspera;
+                    }
+
+                    int nuevoTiempoAtencion = random.nextInt(atencionmax - atencionmin + 1) + atencionmin;
+                    tiempoCajas.set(i, nuevoTiempoAtencion - 1); 
+
+                    totalClientesAtendidos++;
+                }
+            }
+
+            int tamanioActualFila = filaClientes.size();
+            sumaTamanioFila += tamanioActualFila;
+            if (tamanioActualFila > maximoTamanioFila) {
+                maximoTamanioFila = tamanioActualFila;
+            }
+        }
+        
+        System.out.println("\n--- resultados ---");
+        
+        System.out.println("Total de clientes atendidos: **" + totalClientesAtendidos + "**");
+
+        double tamanioMedioFila = (double) sumaTamanioFila / tiempototalmintos;
+        System.out.printf("Tamaño medio de la fila: **%.2f** clientes\n", tamanioMedioFila);
+        System.out.println("Tamaño máximo de la fila: **" + maximoTamanioFila + "** clientes");
+
+        System.out.println("Tiempo máximo de espera: **" + tiempoMaximoEspera + "** minutos");
+        
+        if (tiempoAperturaCaja4 != -1) {
+            System.out.println("➕ Tiempo de apertura de la cuarta caja: **Minuto " + tiempoAperturaCaja4 + "**");
+        } else {
+            System.out.println("➕ Tiempo de apertura de la cuarta caja: **No fue necesario abrirla** (la fila nunca superó los " + caja4 + " clientes).");
+        }
+        
+        System.out.println("\nClientes restantes en fila (sin atender al finalizar): " + filaClientes.size());
+    }
+}
+
+```
 
 
