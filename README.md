@@ -1307,7 +1307,7 @@ public class ListaVacia {
 }
 
 ```
-## Ejercicio 04
+## Ejercicio 01
 ### Comparacion de Colas
 ```javascript
 
@@ -1377,7 +1377,7 @@ public class ComparacionColas {
     }
 }
 ```
-## Ejercicio 05
+## Ejercicio 02
 ### Simulaciond de Supermercado
 ```javascript
 package Ejercicio05;
