@@ -1168,9 +1168,9 @@ public class Principal {
             lista.ordenarLista();
 
             // --- Tarea 4: Mostrar lista ordenada ---
-            System.out.println("\n-------------------------------------------------------");
+            System.out.println("\n---");
             lista.mostrarLista();
-            System.out.println("-------------------------------------------------------");
+            System.out.println("---");
         }
 
         scanner.close();
@@ -1306,6 +1306,78 @@ public class ListaVacia {
     }
 }
 
+```
+## Ejercicio 04
+### Invertir una Palabra 
+```javascript
+package Ejercicio04;
+import java.util.Stack;
+import java.util.Scanner;
+
+/*
+ *
+ * @author angellunaperez
+ * Como aprendido en clase usamos la logica de una pila
+ * para poder invertir una palabra asignada por el usuario
+ */
+
+public class Ejercicio4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Ingrese una palabra: ");
+        String palabra = sc.nextLine();
+        
+        // 1. Inicialización de la Pila
+        Stack<Character> pila = new Stack<>();
+        
+        // 2. Apilar cada letra (Pasos 1 y 2 del Algoritmo)
+        for (char c : palabra.toCharArray()) {
+            pila.push(c); // Añade el carácter a la cima de la Pila
+        }
+        
+        // 3. Desapilar e imprimir (Paso 3 del Algoritmo)
+        System.out.print("Invertida: ");
+        while (!pila.isEmpty()) {
+            System.out.print(pila.pop()); // extrae y elimina el carácter de la cima
+        }
+        sc.close(); //cerrar el Scanner
+    }
+}
+```
+## Ejercicio 05
+### Balanceo de Parentesis
+```javascript
+package Ejercicio05;
+import java.util.Stack;
+
+/*
+ *
+ * @author angellunaperez
+ * Como aprendido en clase usamos la logica de una pila
+ * para encontrar aperturas y cierres en esta clase 
+ */
+
+public class Ejercicio5 {
+    public static boolean estaBalanceada(String expr) {
+        Stack<Character> pila = new Stack<>();
+        for (char c : expr.toCharArray()) {
+            if (c == '(') pila.push(c);
+            else if (c == ')') {
+                if (pila.isEmpty()) return false;
+                pila.pop();
+            }
+        }
+        return pila.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(estaBalanceada("((2+3)*5)")); 
+        System.out.println(estaBalanceada("((2+3)*5"));  
+    //casos adicionales
+        System.out.println(estaBalanceada("()()")); 
+        System.out.println(estaBalanceada("())("));
+    }
+}
 ```
 ## Ejercicio 01
 ### Comparacion de Colas
